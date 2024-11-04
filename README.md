@@ -16,4 +16,9 @@ systemctl start httpd.
 sudo systemctl start mariadb.
 cd /var/www/html.
 mkdir dn.
-wget 
+wget https://github.com/DiegoNunez1/gorgeous_cupcakes/blob/bda423a6bad275e9f4a57d1b38a123bd385651bf/gorgeous_cupcakes-main.zip
+
+unzip main.zip
+cd gorgeous_cupcakes-main
+
+
