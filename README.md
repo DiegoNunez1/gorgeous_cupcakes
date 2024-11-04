@@ -7,13 +7,13 @@ How to implement this application:
    VPC- RDS- EC2- ELASTIC IP.
 5. After the templates has been created succesfully. We go to EC2 IN AWS and We connect to the EC2 that we created in CloudFormation.
 6. We need to run the follow comannd one by one.
--sudo su
--sudo dnf update -y
--sudo dnf install -y httpd wget php-fpm php-mysqli php-json php php-devel
--sudo dnf install -y mariadb105-server
--systemctl enable httpd
--systemctl start httpd
--sudo systemctl start mariadb
--cd /var/www/html
--mkdir dn
+-sudo su.
+-sudo dnf update -y.
+-sudo dnf install -y httpd wget php-fpm php-mysqli php-json php php-devel.
+-sudo dnf install -y mariadb105-server.
+-systemctl enable httpd.
+-systemctl start httpd.
+-sudo systemctl start mariadb.
+-cd /var/www/html.
+-mkdir dn.
 -wget
