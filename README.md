@@ -42,22 +42,38 @@ USE diego;
 Navigate to the SQL file location:
 
 cd /var/www/html/dn/gorgeous_cupcakes-main
+
+
 Import the SQL file:
+
+
 source gorgeous_cupcakes_v1.sql
 
 **7. Configure Database Connection in PHP**
 Navigate to the model directory:
 
-cd model
-Open the PHP database configuration file:
+1.cd model
+
+
+2.Open the PHP database configuration file:
+
+
 sudo nano database.php
+
+
 Update the host, username, and password with your RDS endpoint and credentials from cf_rds.yaml.
+
+
 Save the changes by pressing CTRL + X, then Y, and ENTER.
+
 **8. Access the Application**
-Go to the EC2 Dashboard on AWS.
-Copy the public IPv4 address of the EC2 instance.
-Paste the IP address in your browser to access the deployed website.
-Application should now be live and accessible!
+1.Go to the EC2 Dashboard on AWS.
+2.Copy the public IPv4 address of the EC2 instance.
+3.Paste the IP address in your browser to access the deployed website.
+4.Application should now be live and accessible!
+
+username: admin
+password: password
 
 
 
