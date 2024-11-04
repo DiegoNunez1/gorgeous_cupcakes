@@ -1,46 +1,63 @@
-How to implement this application:
+**Step-by-Step Guide to Deploying Your Application on AWS**
+1. Set Up Infrastructure with AWS CloudFormation
+Log in to AWS and go to CloudFormation.
+Click Create stack > With new resources (standard).
+Upload Templates in Order:
+Choose Upload a template file and upload the following templates one at a time in this order: VPC, RDS, EC2, and Elastic IP.
+Create the Stack by clicking Next and following the prompts until the stack is created.
+**2. Connect to EC2 Instance**
+After the stack is successfully created, go to the EC2 Dashboard.
+Select the EC2 instance created by CloudFormation and connect to it using SSH.
+**3. Configure the Server Environment**
+Run these commands in the EC2 instance terminal one by one:
+sudo su
+sudo dnf update -y
+sudo dnf install -y httpd wget php-fpm php-mysqli php-json php php-devel
+sudo dnf install -y mariadb105-server
 
-1. Go to AWS
-2. Find the option called "CloudFormation"
-3. On the Right hand side of the site. There will be an option called "Create stack" > Click on "With new resources standard"
-4. In create Stack: We need to selected "Choose an existing Template" > "Upload a template file". Then one by one We upload in order
-   VPC- RDS- EC2- ELASTIC IP.
-5. After the templates has been created succesfully. We go to EC2 IN AWS and We connect to the EC2 that we created in CloudFormation.
-6. We need to run the follow comannd one by one.
-a. sudo su.
-b. sudo dnf update -y.
-c. sudo dnf install -y httpd wget php-fpm php-mysqli php-json php php-devel.
-d. sudo dnf install -y mariadb105-server.
-e. systemctl enable httpd.
-f. systemctl start httpd.
-h. sudo systemctl start mariadb.
-i. cd /var/www/html.
-j. mkdir dn.
-k. wget https://github.com/DiegoNunez1/gorgeous_cupcakes/archive/refs/heads/main.zip
-l. unzip main.zip
-m. cd gorgeous_cupcakes-main
-n. unzip gorgeous_cupcakes-main
-o. cd gorgeous_cupcakes-main mysql --password=Password123 --user=admin --host=mysqldb.cncwqlzj2ooh.us-east-1.rds.amazonaws.com
+# Enable and start Apache (HTTP server)
+systemctl enable httpd
+systemctl start httpd
 
+# Start MariaDB server
+sudo systemctl start mariadb
+**4. Download and Set Up Application Files**
+Navigate to the web directory:
 
+cd /var/www/html
+Create a directory for the app:
+mkdir dn
+wget https://github.com/DiegoNunez1/gorgeous_cupcakes/archive/refs/heads/main.zip
+unzip main.zip
+cd gorgeous_cupcakes-main
+**5. Configure the Database**
+Connect to the MySQL database:
 
-7. In this step is for creating a database and changing the directory. Run the following commnads: 
-a. Show databases. 
-b. create diego
-c. use diego.
+mysql --password=Password123 --user=admin --host=mysqldb.cncwqlzj2ooh.us-east-1.rds.amazonaws.com
+**Set up the database:**
+SHOW DATABASES;
+CREATE DATABASE diego;
+USE diego;
+**6. Import SQL Data**
+Navigate to the SQL file location:
 
-8. This step is for installing sql into my SQL connection. Run the following command:
+cd /var/www/html/dn/gorgeous_cupcakes-main
+Import the SQL file:
+source gorgeous_cupcakes_v1.sql
 
-a. cd /var/www/html/dn
-b. cd /var/www/html/dn/gorgeous_cupcakes-main
-c. source /var/www/html/dn/gorgeous_cupcakes-main/gorgeous_cupcakes-main/gorgeous_cupcakes_v1.sql
+**7. Configure Database Connection in PHP**
+Navigate to the model directory:
 
-
-10. The following step is the find the model using the next command:
-cd /var/www/html/dn/gorgeous_cupcakes-main/gorgeous_cupcakes-main/model
-
-12. Direct to PHP database and run the following command to open the dtaabase:
+cd model
+Open the PHP database configuration file:
 sudo nano database.php
+Update the host, username, and password with your RDS endpoint and credentials from cf_rds.yaml.
+Save the changes by pressing CTRL + X, then Y, and ENTER.
+**8. Access the Application**
+Go to the EC2 Dashboard on AWS.
+Copy the public IPv4 address of the EC2 instance.
+Paste the IP address in your browser to access the deployed website.
+Application should now be live and accessible!
 
 
 
